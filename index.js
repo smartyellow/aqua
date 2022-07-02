@@ -140,7 +140,7 @@ module.exports = {
       method: 'get',
       requires: 'smartyellow/aqua/seeAllAquaria',
       handler: async (req, res, user) => {
-        const q = server.storage({ user }).store('aquaria').find().sort({ 'log.created.on': -1 });
+        const q = server.storage({ user }).store('smartyellow/aquarium').find().sort({ 'log.created.on': -1 });
         const result = await (req.headers['format'] == 'object' ? q.toObject() : q.toArray());
         res.json(result);
       },
@@ -162,7 +162,7 @@ module.exports = {
       method: 'get',
       requires: 'smartyellow/aqua/seeAllAquaria',
       handler: async (req, res, user) => {
-        const doc = await server.storage({ user }).store('aquaria').get(req.params[0]);
+        const doc = await server.storage({ user }).store('smartyellow/aquarium').get(req.params[0]);
         if (!doc) {
           res.error(404);
           return;
@@ -245,10 +245,10 @@ module.exports = {
       requires: 'smartyellow/aqua/deleteAquaria',
       handler: async (req, res, user) => {
         // Check if user is allowed to see aquarium to be deleted
-        const aquaria = await server.storage({ user }).store('aquaria').find().toObject();
+        const aquaria = await server.storage({ user }).store('smartyellow/aquarium').find().toObject();
         if (aquaria[req.params[0]]) {
           // User is allowed to see the aquarium to be deleted, continue
-          await server.storage({ user }).store('aquaria').delete({ id: req.params[0] });
+          await server.storage({ user }).store('smartyellow/aquarium').delete({ id: req.params[0] });
           // broadcast reload trigger
           server.publish('cms', 'smartyellow/aqua/reload');
         }
@@ -294,7 +294,7 @@ module.exports = {
           user: user,
         });
         const storageQuery = server.storage({ user }).prepareQuery(filters, query, req.body.languages || false);
-        const find = server.storage({ user }).store('aquaria').find(storageQuery);
+        const find = server.storage({ user }).store('smartyellow/aquarium').find(storageQuery);
         const result = await (req.headers['format'] == 'object' ? find.toObject() : find.toArray());
         res.json(result);
       },
@@ -305,7 +305,7 @@ module.exports = {
       method: 'get',
       requires: 'smartyellow/aqua/seeAllFish',
       handler: async (req, res, user) => {
-        const q = server.storage({ user }).store('fish').find().sort({ 'log.created.on': -1 });
+        const q = server.storage({ user }).store('smartyellow/fish').find().sort({ 'log.created.on': -1 });
         const result = await (req.headers['format'] == 'object' ? q.toObject() : q.toArray());
         res.json(result);
       },
@@ -327,7 +327,7 @@ module.exports = {
       method: 'get',
       requires: 'smartyellow/aqua/seeAllFish',
       handler: async (req, res, user) => {
-        const doc = await server.storage({ user }).store('fish').get(req.params[0]);
+        const doc = await server.storage({ user }).store('smartyellow/fish').get(req.params[0]);
         if (!doc) {
           res.error(404);
           return;
@@ -410,10 +410,10 @@ module.exports = {
       requires: 'smartyellow/aqua/deleteFish',
       handler: async (req, res, user) => {
         // Check if user is allowed to see fish to be deleted
-        const fish = await server.storage({ user }).store('fish').find().toObject();
+        const fish = await server.storage({ user }).store('smartyellow/fish').find().toObject();
         if (fish[req.params[0]]) {
           // User is allowed to see the fish to be deleted, continue
-          await server.storage({ user }).store('fish').delete({ id: req.params[0] });
+          await server.storage({ user }).store('smartyellow/fish').delete({ id: req.params[0] });
           // broadcast reload trigger
           server.publish('cms', 'smartyellow/aqua/reload');
         }
@@ -459,7 +459,7 @@ module.exports = {
           user: user,
         });
         const storageQuery = server.storage({ user }).prepareQuery(filters, query, req.body.languages || false);
-        const find = server.storage({ user }).store('fish').find(storageQuery);
+        const find = server.storage({ user }).store('smartyellow/fish').find(storageQuery);
         const result = await (req.headers['format'] == 'object' ? find.toObject() : find.toArray());
         res.json(result);
       },
@@ -470,7 +470,7 @@ module.exports = {
       method: 'get',
       requires: 'smartyellow/aqua/seeAllMaintenance',
       handler: async (req, res, user) => {
-        const q = server.storage({ user }).store('aquariummaintenance').find().sort({ 'log.created.on': -1 });
+        const q = server.storage({ user }).store('smartyellow/aquariummaintenance').find().sort({ 'log.created.on': -1 });
         const result = await (req.headers['format'] == 'object' ? q.toObject() : q.toArray());
         res.json(result);
       },
@@ -492,7 +492,7 @@ module.exports = {
       method: 'get',
       requires: 'smartyellow/aqua/seeAllMaintenance',
       handler: async (req, res, user) => {
-        const doc = await server.storage({ user }).store('aquariummaintenance').get(req.params[0]);
+        const doc = await server.storage({ user }).store('smartyellow/aquariummaintenance').get(req.params[0]);
         if (!doc) {
           res.error(404);
           return;
@@ -575,10 +575,10 @@ module.exports = {
       requires: 'smartyellow/aqua/deleteMaintenance',
       handler: async (req, res, user) => {
         // Check if user is allowed to see maintenance to be deleted
-        const maintenance = await server.storage({ user }).store('aquariummaintenance').find().toObject();
+        const maintenance = await server.storage({ user }).store('smartyellow/aquariummaintenance').find().toObject();
         if (maintenance[req.params[0]]) {
           // User is allowed to see the maintenance to be deleted, continue
-          await server.storage({ user }).store('aquariummaintenance').delete({ id: req.params[0] });
+          await server.storage({ user }).store('smartyellow/aquariummaintenance').delete({ id: req.params[0] });
           // broadcast reload trigger
           server.publish('cms', 'smartyellow/aqua/reload');
         }
@@ -624,7 +624,7 @@ module.exports = {
           user: user,
         });
         const storageQuery = server.storage({ user }).prepareQuery(filters, query, req.body.languages || false);
-        const find = server.storage({ user }).store('aquariummaintenance').find(storageQuery);
+        const find = server.storage({ user }).store('smartyellow/aquariummaintenance').find(storageQuery);
         const result = await (req.headers['format'] == 'object' ? find.toObject() : find.toArray());
         res.json(result);
       },
