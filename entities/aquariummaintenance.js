@@ -68,7 +68,7 @@ module.exports = {
             { key: 'aquarium',
               editor: 'select',
               options: async ({ storage, user }) => await storage({ user })
-                .store('aquaria')
+                .store('smartyellow/aquarium')
                 .find()
                 .sort({ name: 1 })
                 .toObject('id', 'name'),
