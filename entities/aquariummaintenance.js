@@ -28,6 +28,7 @@ module.exports = {
           sections: [
             'id',
             'aquarium',
+            'date',
             'state',
             'importance',
             'types',
